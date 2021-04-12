@@ -1,3 +1,6 @@
+// This exercise has been commented by Aarni Pavlidi, if you have any questions or suggestions with the code,
+// then please contact me by sending email at me@aarnipavlidi.fi <3
+
 const mongoose = require("mongoose") // Alustetaan muuttuja "mongoose", joka hyödyntää "mongoose" kirjastoa tämän sovelluksen osalta.
 
 // Mikäli kirjoitat terminaalin esim. ainoastaan ==> "node mongo.js" niin alla oleva if-ehto toteutuu, miksi? Koska sen pituus on yhteensä kaksi (2) eli "node mongo.js" on yhtä kuin "process.argv[0] process.argv[1]".
