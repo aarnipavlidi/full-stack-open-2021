@@ -4,6 +4,6 @@ Skipping following task, because previous task didn't had "Invalid value for pro
 
 ```
 
-![alt text](https://i.imgur.com/YpKHRDh.gif)
+![](https://i.imgur.com/YpKHRDh.gif)
 
 ```
