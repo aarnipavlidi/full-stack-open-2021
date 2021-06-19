@@ -1,4 +1,4 @@
-## 7.9: redux, step1
+## 7.9: redux, step2
 
 Doing following exercises based on my previous code: "blogilistan frontend" (step12).
 
