@@ -1,0 +1,12 @@
+.blogs {
+  font-family: 'Pangolin', cursive;
+}
+
+.navbar-links {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-links:hover {
+  color: white;
+}
