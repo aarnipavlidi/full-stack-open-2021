@@ -1,0 +1,35 @@
+.blogs {
+  font-family: 'Pangolin', cursive;
+}
+
+.navbar-links {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-links:hover {
+  color: white;
+}
+
+.custom-background {
+  background-color: rgb(255, 255, 255, 0.3);
+}
+
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #e9defa;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(233, 222, 250, 0.5), rgba(251, 252, 219, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(233, 222, 250, 0.5), rgba(251, 252, 219, 0.5))
+}
