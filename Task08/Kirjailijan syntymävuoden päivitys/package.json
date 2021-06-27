@@ -1,0 +1,21 @@
+{
+  "name": "fullstackopen-task08",
+  "version": "1.0.0",
+  "description": "Full Stack Open 2021 Task 08",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Aarni Pavlidi",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.25.2",
+    "graphql": "^15.5.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
