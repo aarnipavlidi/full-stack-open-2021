@@ -1,0 +1,58 @@
+// This exercise has been commented by Aarni Pavlidi, if you have any questions or suggestions with the code,
+// then please contact me by sending email at me@aarnipavlidi.fi <3
+
+import express from 'express'; // Tuodaan "express" funktio sovelluksen käytettäväksi "express" nimisestä kirjastosta.
+import patientsService from '../src/services/patientsService'; // Alustetaan muuttuja "patientsService", joka hyödyntää "patientsService.ts" tiedoston sisältöä sovelluksen aikana.
+
+// Alustetaan muuttuja "router", joka suorittaa kyseisen funktion.
+// Funktion avulla luodaan uusi "router" objekti, jonka avulla
+// sovellus pystyy käsittelemään palvelimeeen kohdistettua
+// erilaisia pyyntöjä käyttäjän osalta.
+const router = express.Router(); // Lisää tietoa löytyy täältä: https://expressjs.com/en/guide/routing.html
+
+// Kun käyttäjä suorittaa pyynnön osoitteeseen "http://localhost:3001/api/patients",
+// niin sovellus suorittaa {...} sisällä olevat asiat ja palauttaa takaisin käyttäjälle
+// "patients.json" tiedoston datan. Kun alla oleva funktio "getAllPatients(...)" on
+// suoritettu, niin se palauttaa takaisin datan, joka näytetään käyttäjälle.
+router.get('/', (_request, response) => {
+  response.json(patientsService.getAllPatients());
+});
+
+// Kun käyttäjä suorittaa pyyynnön esim. osoitteeseen "http://localhost:3001/api/patients/random_id",
+// niin sovellus suorittaa {...} sisällä olevat asiat ja palauttaa takaisin arvon missä käyttäjän
+// antama id:n arvo täsmää "patients.json" datan kanssa. Muussa tapauksessa pyyntöön palautetaan
+// "404" koodi käyttäjälle takaisin.
+router.get('/:id', (request, response) => {
+  // Alustetaan muuttuja "showPatient", joka suorittaa kyseisen funktion eli
+  // "getPatientsById(...)" funktio saa parametrin arvoksi käyttäjän tekemän
+  // pyynnön kautta tuleva => "request.params.id" muuttujan arvo.
+  const showPatient = patientsService.getPatientsById(String(request.params.id));
+
+  // Jos "showPatient" palauttaa datan, eli löytyy "matchi" tietokannasta,
+  // niin suoritetaan {...} sisällä oleva asia ja muussa tapauksessa, jos
+  // ei löydy data, niin suoritetaan "else" funktio ja sen sisällä oleva asia.
+  if (showPatient) {
+    response.send(showPatient);
+  } else {
+    response.sendStatus(404);
+  }
+});
+
+// Kun käyttäjä haluaa lisätä uuden arvon (Patient) tietokantaan, niin sovellus suorittaa
+// {...} sisällä olevat asiat. Ensin Alustetaan muuttujat, jotka saavat arvon pyynnön kautta
+// tulevasta => "request.body" muuttujan arvosta. Sen jälkeen suoritetaan "addPatientDatabase(...)"
+// funktio, jonka jälkeen palautetaan pyyntöän takaisin "newPatientValue" muuttujan arvolla.
+router.post('/', (request, response) => {
+  const { name, dateOfBirth, ssn, gender, occupation } = request.body;
+  const newPatientValue = patientsService.addPatientDatabase(
+    name,
+    dateOfBirth,
+    ssn,
+    gender,
+    occupation,
+  )
+  response.json(newPatientValue);
+});
+
+// Viedään (export) alla oleva muuttuja (router) sovelluksen käytettäväksi, jotta esim. "index.ts" tiedosto pystyy suorittamaan kyseiset funktiot.
+export default router;
