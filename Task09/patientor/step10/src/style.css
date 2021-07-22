@@ -1,0 +1,19 @@
+.custom-css {
+  margin-top: 40px;
+}
+
+.entry-css {
+  margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.custom-container {
+  border: solid;
+  background-color: #cccccc;
+  margin-top: 10px;
+}
+
+.entry-button {
+  margin-top: 10px;
+}
