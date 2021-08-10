@@ -1,0 +1,29 @@
+{
+  "anecdotes": [
+    {
+      "content": "anekdootit ja backend, step1",
+      "votes": 0,
+      "id": "47145"
+    },
+    {
+      "content": "anekdootit ja backend, step2",
+      "votes": 0,
+      "id": "tiTVsCz"
+    },
+    {
+      "content": "anekdootit ja backend, step5",
+      "votes": 0,
+      "id": "5d3gQrl"
+    },
+    {
+      "content": "anekdootit ja connect, step1",
+      "votes": 0,
+      "id": "AyvCIdT"
+    },
+    {
+      "content": "anekdootit ja connect, step2",
+      "votes": 0,
+      "id": "IpBFWas"
+    }
+  ]
+}

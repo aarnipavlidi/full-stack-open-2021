@@ -1,0 +1,74 @@
+
+name: Anecdotes deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: 'http://localhost:8000'
+      - name: Bump version and push tag
+        if: github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip')
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
+      - name: Deploy to Heroku
+        if: github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip') && success()
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "tranquil-hollows-65024"
+          heroku_email: "me@aarnipavlidi.fi"
+          healthcheck: "https://tranquil-hollows-65024.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - name: action-slack
+        uses: 8398a7/action-slack@v3.9.2
+        with:
+          status: custom
+          fields: commit, author, took, eventName, job
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' && `${process.env.AS_EVENT_NAME}` == 'push'
+                  ? 'good'
+                  : '${{ job.status }}' === 'failure' && `${process.env.AS_EVENT_NAME}` == 'push'
+                  ? 'danger'
+                  : '${{ job.status }}' === 'success' && `${process.env.AS_EVENT_NAME}` == 'pull_request'
+                  ? 'good'
+                  : 'danger',
+                text: '${{ job.status }}' === 'success' && `${process.env.AS_EVENT_NAME}` == 'push'
+                  ? `New version has been deployed to https://tranquil-hollows-65024.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} and build took total of ${process.env.AS_TOOK}.`
+                  : '${{ job.status }}' === 'failure' && `${process.env.AS_EVENT_NAME}` == 'push'
+                  ? `New version has not been deployed (${process.env.AS_COMMIT}), because there was problem with building project ${process.env.AS_AUTHOR}. Build took total of ${process.env.AS_TOOK}.`
+                  : '${{ job.status }}' === 'success' && `${process.env.AS_EVENT_NAME}` == 'pull_request'
+                  ? `New pull request (${process.env.AS_COMMIT}) has been uploaded to main branch by ${process.env.AS_AUTHOR}. Build took total of ${process.env.AS_TOOK}.`
+                  : `There was problem while uploading pull request (${process.env.AS_COMMIT}) to main branch by ${process.env.AS_AUTHOR}. Build took total of ${process.env.AS_TOOK}.`
+                }]
+              }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
