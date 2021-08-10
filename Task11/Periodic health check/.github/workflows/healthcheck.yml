@@ -1,0 +1,23 @@
+name: 11.20 Periodic health check
+
+on:
+  schedule:
+    - cron: '0 0 * * *' #Does cron job once a day! :)
+
+jobs:
+  url_health_check_action:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v1.5
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://polar-lake-13037.herokuapp.com/health
+          # Follow redirects, or just report success on 3xx status codes
+          follow-redirect: no # Optional, defaults to "no"
+          # Fail this action after this many failed attempts
+          max-attempts: 3 # Optional, defaults to 1
+          # Delay between retries
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+          # Retry all errors, including 404
+          retry-all: no # Optional, defaults to "no"
