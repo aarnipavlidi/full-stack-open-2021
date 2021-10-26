@@ -1,0 +1,29 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20211026213413
+Username: DESKTOP-8TV6OAD\aarni
+RunAs User: DESKTOP-8TV6OAD\aarni
+Configuration Name: 
+Machine: DESKTOP-8TV6OAD (Microsoft Windows NT 10.0.19043.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 11196
+PSVersion: 5.1.19041.1237
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1237
+BuildVersion: 10.0.19041.1237
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\aarni\fullstackopen\Containers-part12\script-answers\exercise12_3.txt
+PS C:\Users\aarni> docker start -i optimistic_vaughan
+root@eb9065a54138:/# nano /usr/src/app/index.js
+root@eb9065a54138:/# nano /usr/src/app/index.js
+root@eb9065a54138:/# exit
+exit
+PS C:\Users\aarni> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20211026213718
+**********************
