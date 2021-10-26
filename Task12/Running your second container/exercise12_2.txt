@@ -1,0 +1,55 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20211026204011
+Username: DESKTOP-8TV6OAD\aarni
+RunAs User: DESKTOP-8TV6OAD\aarni
+Configuration Name: 
+Machine: DESKTOP-8TV6OAD (Microsoft Windows NT 10.0.19043.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 11196
+PSVersion: 5.1.19041.1237
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1237
+BuildVersion: 10.0.19041.1237
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\aarni\fullstackopen\Containers-part12\script-answers\exercise12_2.txt
+PS C:\Users\aarni> docker container run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+PS C:\Users\aarni> docker run -it ubuntu bash
+root@eb9065a54138:/# mkdir /usr/src/app
+root@eb9065a54138:/# cd /usr/src/app
+root@eb9065a54138:/usr/src/app# cat>index.js
+^C
+root@eb9065a54138:/usr/src/app# ls -t -r
+index.js
+root@eb9065a54138:/usr/src/app# exit
+exit
+PS C:\Users\aarni> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20211026204303
+**********************
